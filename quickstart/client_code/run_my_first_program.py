@@ -7,8 +7,12 @@ def nada_main():
     my_int1 = SecretInteger(Input(name="my_int1", party=party1))
     my_int2 = SecretInteger(Input(name="my_int2", party=party1))
 
-    # Compute the difference between my_int1 and my_int2, then square the result
-    difference = my_int1 - my_int2
-    final_result = difference * difference
+    # Compute the greatest common divisor (GCD) of my_int1 and my_int2
+    def gcd(a, b):
+        while b != 0:
+            a, b = b, a % b
+        return a
 
-    return [Output(final_result, "my_output", party1)]
+    gcd_result = SecretInteger(gcd(my_int1, my_int2))
+
+    return [Output(gcd_result, "my_output", party1)]
